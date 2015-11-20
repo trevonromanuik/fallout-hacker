@@ -76,7 +76,7 @@ async.waterfall([
 						for (var i = 0; i < scores.length; i++) {
 							if (scores[i] == max) break;
 						}
-						print('Options are: ' + options.join(', '));
+						print('Options are: ' + options.join(' '));
 						print('Best guess: ' + options[i] + ' - ' + scores[i]);
 						print('Enter your choice');
 						prompt(cb);
@@ -93,12 +93,13 @@ async.waterfall([
 					}
 					matching = parseInt(matching);
 					for (var j = options.length - 1; j >= 0; j--) {
-						if (i == j || matrix[i][j] > matching) options.splice(j, 1);
+						if (i == j || matrix[i][j] != matching) options.splice(j, 1);
 					}
 					cb();
 				});
 			},
 			function(err) {
+				print('Thanks for playing!');
 				process.exit();
 			}
 		)
